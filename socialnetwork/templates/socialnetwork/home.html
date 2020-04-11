@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required by bootstrap -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% load static %}
+    </head>
+
+    <body>
+        <h3 class='text-center'>
+            Word: {{ og_word }}, Letters: {{ letters }}
+            <br>
+            {% for w in words %}
+                {{ w }}
+                </br>
+            {% endfor %}
+        </h3>
+
+    </body>
+</html>
