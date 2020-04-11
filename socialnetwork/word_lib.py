@@ -2,7 +2,7 @@ from nltk.stem.snowball import SnowballStemmer
 import os
 from collections import Counter
 
-dictionaryFile = 'socialnetwork/english_dictionary.txt'
+dictionaryFile = '/app/socialnetwork/english_dictionary.txt'
 
 # Returns a set containing the dictionary
 def getWords():
