@@ -1,0 +1,17 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Project file ignores
+*.log
+*.pyc
+__pycache__
+*.swp
+.vscode
+*.pem
+*.db
+*.sqlite3
+
+# Virtual environments
+*venv
+*my_venv
+
+# Misc
+.DS_Store
