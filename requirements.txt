@@ -1,10 +1,10 @@
 asn1crypto==0.24.0
 click==7.1.1
 cryptography==2.1.4
-Django==1.11.29
+Django==3.0.5
 enum34==1.1.6
 Flask==1.1.2
-gyp==0.1
+git+https://chromium.googlesource.com/external/gyp
 idna==2.6
 ipaddress==1.0.17
 itsdangerous==1.1.0
@@ -13,9 +13,12 @@ keyring==10.6.0
 keyrings.alt==3.0
 MarkupSafe==1.1.1
 pycrypto==2.6.1
-pygobject==3.26.1
+pygobject==3.36.0
 pytz==2019.3
 pyxdg==0.25
 SecretStorage==2.3.1
 six==1.11.0
 Werkzeug==1.0.1
+nltk==3.4.5
+pycairo==1.18.2
+pillow==7.1.1
