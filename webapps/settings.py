@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-ALLOWED_HOSTS = ['34.233.41.49', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 WSGI_APPLICATION = 'webapps.wsgi.application'
 
