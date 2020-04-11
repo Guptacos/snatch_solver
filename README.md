@@ -13,7 +13,7 @@ show all words possible.
 
 
 
-### John's notes
+## John's notes
 sudo apt-get install python3-pip
 
 virtualenv env
@@ -29,10 +29,21 @@ pip3 install nltk
 pip install --upgrade django
 
 
-
 ### Docker
- docker build -t jlanghauser/snatch-solver .
- docker run -p 8000:8000 jlanghauser/snatch-solver:latest
+ docker build -t gcr.io/langatan/snatch-solver:latest .
+ docker run -p 8000:8000 gcr.io/langatan/snatch-solver:latest 
  docker container exec -it <CONTAINER_NAME> sh
  
+### Deployment 
 
+#### You'll need access to the production langatan project/cluster
+gcloud auth login
+gcloud config set project langatan
+docker push gcr.io/langatan/snatch-solver:latest
+Will need to change the image name in k8 yaml
+kubectl config get-contexts
+kubectl config use-context gke_langatan_us-east1-b_main-cluster
+kubectl apply -f k8s-pod.yaml 
+
+#### This also has an ingress, we just aren't using it right now
+kubectl apply -f ingress.yaml

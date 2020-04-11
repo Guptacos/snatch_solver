@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snatch
+spec:
+  selector:
+    matchLabels:
+      app: snatch
+  template:
+    metadata:
+      labels:
+        app: snatch
+        env: development
+    spec:
+      containers:
+      - name: snatch
+        image: gcr.io/langatan/snatch-solver@sha256:bab7a8e3e8e1dd7e371604da3f94115eaa12a0032f17317a36ca3b5d5dc8cfba
+        ports:
+          - containerPort: 8000
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: snatch-service
+    labels:
+      app: snatch-service
+  spec:
+    type: LoadBalancer
+    ports:
+     - port: 80
+       targetPort: 8000
+    selector:
+      app: snatch
