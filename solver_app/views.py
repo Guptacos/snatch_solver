@@ -6,9 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
-from socialnetwork.forms import *
-from socialnetwork.models import *
-import socialnetwork.word_lib as word_lib
+from solver_app.forms import *
+from solver_app.models import *
+import solver_app.word_lib as word_lib
 
 # Create your views here.
 
@@ -23,4 +23,4 @@ def home(request, word=None):
     else:
         context['words'] = word_lib.getPossibleSteals(globalDict, word)
 
-    return render(request, 'socialnetwork/home.html', context)
+    return render(request, 'solver_app/home.html', context)

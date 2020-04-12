@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from socialnetwork import views
+from solver_app import views
 
 # TODO should there be a base path?
 # path('', views.globalStream),
-# path('/socialnetwork/', include('socialnetwork.urls')),
+# path('/solver_app/', include('solver_app.urls')),
 urlpatterns = [
-    path('', include('socialnetwork.urls')),
+    path('', include('solver_app.urls')),
 ]

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't^=*l_lrhj-th_as)#lcqxfpuwr=ndv7ugb$-xd!_txx!)_dcp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'socialnetwork'
+    'solver_app'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'webapps.urls'
 LOGIN_URL = 'login'
 
 # Default URL to redirect to after a user logs in.
-LOGIN_REDIRECT_URL = 'socialnetwork/'
+LOGIN_REDIRECT_URL = 'solver_app/'
 
 TEMPLATES = [
     {
