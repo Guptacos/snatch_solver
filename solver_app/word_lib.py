@@ -1,6 +1,6 @@
 from solver_app.word_class import LibWord
 
-dictionaryFile = 'solver_app/english_dictionary.txt'
+dictionaryFile = '/app/solver_app/english_dictionary.txt'
 
 # @return: a dict of lists of LibWord objects constructed from the dict file.
 #          The dict contains lists of words, where the key is the number of
