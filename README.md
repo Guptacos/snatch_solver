@@ -1,54 +1,89 @@
-In order to run the webapp:
-1) create a virtual environment using 'venv' or 'virtualenv'
-2) install requirements from requirements.txt
-3) run 'python3 manage.py runserver'
+# Snatch Solver
+This project initially started as a command line utility for my family and I
+to check for solutions we missed after we finished a game of Snatch. Since
+then, it has devloped into a small webapp to serve that same functionality,
+but online.
 
-To use the solver, go to:
-localhost:8000/{word}/{letters}
+Given a word , the service finds every word in the dictionary with a distinct
+root and whose letters are a superset of that given word. For example,
+submitting `test` would return `attest`, but **not** `tests`.
+While the letters in `test` are a subset of those in `tests`, the two
+words have the same root, i.e. `test`.
 
-where {word} is the word you want to steal, and {letters} are the
-letters available on the board. If {letters} is left blank, it will
-show all words possible.
+You can find the most recent deployment [here](snatch.nikoapps.com).
+
+The dictionary currently being used was found [here](https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable).
 
 
+<br>
 
+## Local Development
+In order to run the webapp locally, run the following from the top level
+directory:
+<br>
+``` docker-compose up```
 
-## John's notes
-sudo apt-get install python3-pip
+This will build the local code and run it in a container at
+```localhost:8000```. In addition, it will rebuild and update as you make
+updates to the code, so you can see your changes live.
 
-virtualenv env
+The app also has continuous deployment setup (TODO @John), so every time
+changes are committed to master, the [deployed version](snatch.nikoapps.com)
+should update.
 
-pip3 install -r requirements.txt
-pip3 install --upgrade django
+<br>
 
-python -m django --version # 2.0.2
-python3 -m django --version # 2.0.2
+## Snatch: the game that started all this
+Snatch is a fun game that requires 2 or more players and set of letter tiles.
+While we've found that scrabble tiles have a good distribution, we've also
+had fun using bananagrams tiles.
 
-pip3 install nltk
+#### Setup
+- Begin by laying all letters flat in the middle of the table, facing down.
 
-pip install --upgrade django
+#### Gameplay
+- All players are assigned a letter minimum. The default is 4, but you can
+shift this to accomodate for players of different levels (a better player may
+be given a minimum of 5, for example)
+- Players can form words using letters that have been flipped over in the
+middle, if the word they form is at least as long as their minimum.
+- Players can also *steal* words from other players. In order to steal a
+word, **at least** one letter must be added from the middle of the board. The
+letters originally in the word being stolen must stay together in the new
+word and must all be used, but may be rearranged. In addition, the new word
+must have a different root meaning. Here is an example below.
+  - Let's say Player one has the word `income`, and the letters in
+  the middle are `b`, `s`, `h`, and `r`. Player 2 would like to steal income.
+  - Player 2 is **not** allowed to turn `income` into `bins` and `chrome`.
+  While this uses letters from the middle, adds letters, and makes words with
+  new roots, you are not allowed to separate letters once they are in a word.
+  - Player 2 is **not** allowed to turn `income` into `incomes`. Stolen words
+  must change the *root meaning* of the word being stolen
+  - Player 2 could, however, turn `income` into `combine` by adding the `b`
+  from the middle and rearranging the letters.
 
-### Local development
-docker-compose up
+#### Turns
+- Snatch doesn't have turns like in other games.
+- Anybody can call out a word when they see it. So if somebody wants to make
+`cart` out of the middle, they say `cart` before somebody else uses the
+letters. The same is true for stealing. To steal a word, you must say the
+*new* word before anybody else. So to steal `income` by adding a `b`, you
+would call out `combine`.
+- If multiple players call out a word that uses the same letters from the
+middle at the same time, they play rock paper scissors to decide who gets it.
+- Flipping: players can turn letters over whenever they want, within reason.
+We usually go with "flip letters over when most people feel like they need
+more letters". If many people are obviously deep in thought, don't start
+flipping letters, instead ask if they're ready.
+- Disputes: if somebody tries to make a word that no one believes exists,
+they must give a definition (can be a loose one) of what the word means. If
+people still doubt it, you can look up the word online.
 
-### Docker
- docker build -t gcr.io/langatan/snatch-solver:latest .
- docker run -p 8000:8000 gcr.io/langatan/snatch-solver:latest 
- docker container exec -it <CONTAINER_NAME> sh
- 
-### Deployment 
-
-#### You'll need access to the production langatan project/cluster
-gcloud auth login
-gcloud config set project langatan
-docker push gcr.io/langatan/snatch-solver:latest
-Will need to change the image name in k8 yaml
-kubectl config get-contexts
-kubectl config use-context gke_langatan_us-east1-b_main-cluster
-kubectl apply -f k8s-pod.yaml 
-
-#### This also has an ingress, we just aren't using it right now
-kubectl apply -f ingress.yaml
-
-## Todo
-CI/CD with CloudBuild - https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
+#### Scoring and winning
+- The game is over when all letters have been used or all players agree to
+end it, i.e. if nobody can steal any other words.
+- Words are worth 1 point for the first "letter minimum" letters, and then 1
+point for each additional lettter. For example, if a player with a 4 letter
+minimum makes `combine`, they would get 1 point for the first 4 letters, and
+then another 3 for the remaining letters, for a total of 4.
+- The player with the most points wins!
