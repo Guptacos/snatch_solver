@@ -4,23 +4,16 @@
         <!-- Required by bootstrap -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/solver_app/home.css' %}"
     </head>
 
     <body>
         {% if error %}
-            <h3 class='text-center'>
+            <h3 class="text-center">
                 Error: {{ error }}
            </h3>
-        {% elif og_word %}
-            <h3 class='text-center'>
-                Word: {{ og_word }}
-                <br>
-                {% for w in steals %}
-                    {{ w }}
-                    </br>
-                {% endfor %}
-            </h3>
         {% else %}
             <form method="post" action="{% url 'home' %}">
                 <label for="word">Word to steal: </label>
@@ -28,6 +21,26 @@
                 {% csrf_token %}
                 <input type="submit" value="Get steals">
             </form>
+
+            {% if og_word %}
+                <h3 class="text-center">
+                    Word: {{ og_word }}
+                    <br>
+                </h3>
+
+                <table>
+                    <tr>
+                        <td><span class="table_header">New word</span></td>
+                        <td><span class="table_header">Letters needed</span></td>
+                    </tr>
+                    {% for stealWord, stealLetters in steals %}
+                        <tr>
+                            <td>{{ stealWord }}</td>
+                            <td>{{ stealLetters }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
         {% endif %}
     </body>
 </html>

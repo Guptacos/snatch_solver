@@ -31,7 +31,10 @@ def getDict():
 #        I have never seen a word longer than ~10-12 in snatch
 # @note: this function is basically cheating, and shouldn't be used except for
 #        an AI or a hint giving system. Or cheating, if you're into that.
-def getPossibleSteals(wordDict, word, maxLen=20):
+#
+# @return: a list of tuples, where tup[0] is a stealable word, and tup[1] is
+#          the letters needed to steal it.
+def getPossibleSteals(wordDict, word, maxLen=12):
     ogWord = LibWord(word)
     result = []
 
@@ -45,9 +48,9 @@ def getPossibleSteals(wordDict, word, maxLen=20):
                 continue
 
             if ogWord.isSubsetOf(dictWord):
-                result.append(dictWord.text)
+                result.append((dictWord.text, dictWord.letterDiff(ogWord)))
 
-    result.sort(key=len)
+    result.sort(key=lambda elem: len(elem[0]))
     return result
 
 # @param letters: a string to permute
