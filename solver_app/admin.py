@@ -1,5 +1,5 @@
 from django.contrib import admin
-from socialnetwork.models import Post, Comment
+from solver_app.models import Post, Comment
 
 # Register your models here.
 admin.site.register(Post)
