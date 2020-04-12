@@ -8,21 +8,19 @@ from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from socialnetwork.forms import *
 from socialnetwork.models import *
-from socialnetwork.word_lib import *
+import socialnetwork.word_lib as word_lib
 
 # Create your views here.
 
-def home(request, word=None, letters=None):
-    print(word, letters)
-    context = {'og_word': word, 'letters': letters}
+globalDict = word_lib.getDict()
+
+def home(request, word=None):
+    print(word)
+    context = {'og_word': word}
 
     if word is None:
-        context['og_word']= 'Please append /word/letters to the url!'
-    elif letters is None:
-        context['words'] = list(getPossibleSteals(word))
+        context['og_word']= 'Please append /word to the url!'
     else:
-        context['words'] = list(newWordsManyLetters(word, letters))
-
-    print(word, letters)
+        context['words'] = word_lib.getPossibleSteals(globalDict, word)
 
     return render(request, 'socialnetwork/home.html', context)
