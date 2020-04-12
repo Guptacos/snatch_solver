@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: snatch
-        image: gcr.io/langatan/snatch-solver@sha256:bab7a8e3e8e1dd7e371604da3f94115eaa12a0032f17317a36ca3b5d5dc8cfba
+        image: gcr.io/langatan/snatch-solver@sha256:81c679fe5724975f01dfc508a0c742077280ce2323b1b1621e30f603a200b6b0
         ports:
           - containerPort: 8000
 ---
