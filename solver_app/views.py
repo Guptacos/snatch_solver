@@ -8,14 +8,23 @@ globalDict = word_lib.getDict()
 def home(request):
     context = dict()
 
+    # Requesting a steal
     if request.method == 'POST':
-        # Somebody did inspect element on the frontend to mess up the form
-        if 'word' not in request.POST:
-            context['error'] = 'Nice try! Please actually submit a word :)'
+        # Default both to None
+        word = request.POST.get('word', None)
+        letters = request.POST.get('letters', None)
+        if letters == '':
+            letters = None
+
+        if word is None:
+            context['error'] = 'Please submit a word!'
+
+        # Word was provided
         else:
-            ogWord = request.POST.get('word')
-            context['og_word'] = ogWord
-            context['steals'] = word_lib.getPossibleSteals(globalDict, ogWord)
+            context['steals'] = word_lib.getPossibleSteals(globalDict, word, letters)
+            context['og_word'] = word
+            if letters is not None:
+                context['letters'] = letters
 
     # If method is GET, context is empty, so home.html will populate with a form
     return render(request, 'solver_app/home.html', context)
