@@ -19,5 +19,4 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('<str:word>', views.home, name='home'),
-    path('<str:word>/<str:letters>', views.home, name='home'),
 ]
