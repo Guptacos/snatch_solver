@@ -38,9 +38,9 @@ def getDict():
 # @return: a list of tuples, where tup[0] is a stealable word, and tup[1] is
 #          the letters needed to steal it.
 def getPossibleSteals(wordDict, word, letters=None, maxLen=12):
+
     # Helper function assumes you have unlimited letters
     def stealHelp():
-        print(maxLen)
         ogWord = LibWord(word)
         result = []
 

@@ -5,7 +5,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/solver_app/home.css' %}"
+        <link rel="stylesheet" type="text/css" href="{% static 'css/solver_app/home.css' %}">
     </head>
 
     <body>
@@ -15,9 +15,17 @@
            </h3>
         {% else %}
             <form method="post" action="{% url 'home' %}">
-                <label for="word">Word to steal: </label>
-                <input id="word" type="text" name="word">
-                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label for="word">Word to steal: </label></td>
+                        <td><input id="word" type="text" name="word"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="letters">Letters available: </label></td>
+                        <td><input id="letters" type="text" name="letters" value=""></td>
+                    </tr>
+                    {% csrf_token %}
+                </table>
                 <input type="submit" value="Get steals">
             </form>
 
@@ -25,6 +33,7 @@
                 <h3 class="text-center">
                     Word: {{ og_word }}
                     <br>
+                    Letters: {{ letters }}
                 </h3>
 
                 <table>
