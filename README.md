@@ -28,6 +28,8 @@ pip3 install nltk
 
 pip install --upgrade django
 
+### Local development
+docker-compose up
 
 ### Docker
  docker build -t gcr.io/langatan/snatch-solver:latest .
@@ -47,3 +49,6 @@ kubectl apply -f k8s-pod.yaml
 
 #### This also has an ingress, we just aren't using it right now
 kubectl apply -f ingress.yaml
+
+## Todo
+CI/CD with CloudBuild - https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
