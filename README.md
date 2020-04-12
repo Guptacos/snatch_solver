@@ -12,7 +12,11 @@ words have the same root, i.e. `test`.
 
 You can find the most recent deployment [here](snatch.nikoapps.com).
 
-The dictionary currently being used was found [here](https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable).
+The dictionary currently being used was found
+[here](https://drive.google.com/file/d/1oGDf1wjWp5RF_X9C7HoedhIWMh5uJs8s/view),
+as recommended by
+[this](https://boardgames.stackexchange.com/questions/38366/latest-collins-scrabble-words-list-in-text-file)
+stack overflow post.
 
 
 <br>
