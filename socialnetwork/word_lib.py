@@ -1,4 +1,4 @@
-from word_class import LibWord
+from socialnetwork.word_class import LibWord
 
 dictionaryFile = '/app/socialnetwork/english_dictionary.txt'
 
@@ -47,4 +47,5 @@ def getPossibleSteals(wordDict, word, maxLen=20):
             if ogWord.isSubsetOf(dictWord):
                 result.append(dictWord.text)
 
+    result.sort(key=len)
     return result
