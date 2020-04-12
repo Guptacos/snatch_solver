@@ -22,10 +22,25 @@ class LibWord():
     def sameRootAs(self, other):
         return self.root == other.root
 
+    # Return letters required to convert one word into the other, as a string
+    # Requires either self.isSubsetOf(other) or other.isSubsetOf(self)
+    def letterDiff(self, other):
+        diff = dict()
+        if self.len > other.len:
+            diff = self.count - other.count
+        else:
+            diff = other.count - self.count
+
+        result = ''
+        for k,v in diff.items():
+            result += k*v
+
+        return ''.join(sorted(result))
+
     # Used for debugging
     def __repr__(self):
-        return 'word: ' + self.word + ', root: ' + self.root
+        return 'word: ' + self.text + ', root: ' + self.root
 
     # Human readable
     def __str__(self):
-        return self.word
+        return self.text
